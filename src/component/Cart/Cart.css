@@ -1,0 +1,13 @@
+.cart-container {
+}
+.cartHeading {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 5px;
+}
+.grandTotal {
+  color: rgb(90, 5, 5);
+  font-weight: bold;
+}

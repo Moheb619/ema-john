@@ -1,0 +1,28 @@
+.product {
+  display: flex;
+  border-bottom: 1px lightgrey solid;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  padding-bottom: 5px;
+}
+.product-details h4 {
+  color: blue;
+  font-weight: 400;
+}
+.main-button {
+  background-color: goldenrod;
+  width: 150px;
+  height: 30px;
+  border: 2px darkgrey solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.main-button:hover {
+  background-color: rgb(138, 104, 17);
+}
+.shoppingCartIcon {
+  margin-right: 5px;
+}
+.product-image {
+  margin-right: 10px;
+}
