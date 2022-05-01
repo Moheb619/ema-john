@@ -5,9 +5,7 @@ const Cart = (props) => {
     const precision = num.toFixed(2);
     return Number(precision);
   };
-  const total = formatNumber(
-    props.cart.reduce((total, prod) => total + prod.price, 0)
-  );
+  const total = formatNumber(props.cart.reduce((total, prod) => total + prod.price * prod.quantity, 0));
   let shipping = 0;
   if (total > 0) {
     shipping = 12.99;
@@ -33,8 +31,10 @@ const Cart = (props) => {
         <small>Tax+VAT: ${vat}</small>
       </p>
       <p className="grandTotal">
-        Total Price:${formatNumber(total + shipping + vat)}
+        Total Price:$
+        {formatNumber(total + shipping + vat)}
       </p>
+      {props.children}
     </div>
   );
 };

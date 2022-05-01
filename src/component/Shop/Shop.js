@@ -3,7 +3,11 @@ import "./Shop.css";
 import fakeData from "../../fakeData/products.JSON";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
+import { addToDb, getStoredCart } from "../../utilities/fakedb";
+import { ownerDocument } from "@mui/material";
+import { Link } from "react-router-dom";
 const Shop = () => {
+  var id = 0;
   const value = Math.floor(Math.random() * 71);
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
@@ -12,23 +16,50 @@ const Shop = () => {
       .then((res) => res.json())
       .then((data) => {
         setProduct(data.slice(value, value + 10));
+
+        const savedCart = getStoredCart();
+        const productKey = Object.keys(savedCart);
+        const previousCart = productKey.map((pdKey) => {
+          const product = data.find((pd) => pd.key === pdKey);
+          product.quantity = savedCart[pdKey];
+          return product;
+        });
+        setCart(previousCart);
+        console.log(previousCart);
       });
   }, []);
 
   const handleAddProduct = (product) => {
-    const newCart = [...cart, product];
+    const sameProduct = cart.find((pd) => pd.key === product.key);
+    let count = 1;
+    let newCart;
+    if (!sameProduct) {
+      product.quantity = 1;
+      newCart = [...cart, product];
+    } else {
+      count = sameProduct.quantity + 1;
+      sameProduct.quantity = count;
+      product.quantity = sameProduct.quantity;
+      const other = cart.filter((pd) => pd.key != sameProduct.key);
+      newCart = [...other, product];
+    }
     setCart(newCart);
+    addToDb(product.key);
   };
 
   return (
     <div className="shop-container">
       <div className="product-container">
         {product.map((pd) => (
-          <Product handleAddProduct={handleAddProduct} prod={pd}></Product>
+          <Product showCartButton={true} handleAddProduct={handleAddProduct} prod={pd} key={pd.key}></Product>
         ))}
       </div>
-      <div className="cart-container">
-        <Cart cart={cart}></Cart>
+      <div className="cart-container px-2">
+        <Cart cart={cart}>
+          <Link to={"/review"} style={{ textDecoration: "none", color: "black" }}>
+            <button className="main-button">Review Order</button>
+          </Link>
+        </Cart>
       </div>
     </div>
   );
