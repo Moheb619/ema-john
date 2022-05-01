@@ -13,7 +13,7 @@ const ProductDetail = () => {
         const prod = data.find((pd) => pd.key === productKey);
         setSelectedProduct(prod);
       });
-  }, []);
+  }, [productKey]);
   return (
     <div>
       <Product showCartButton={false} prod={selectedProduct}></Product>

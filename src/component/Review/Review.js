@@ -8,7 +8,7 @@ const Review = () => {
   const [cart, setCart] = useState([]);
   const [orderPlaced, setOrder] = useState(false);
   const removeProduct = (productKey) => {
-    const newCart = cart.filter((pd) => pd.key != productKey);
+    const newCart = cart.filter((pd) => pd.key !== productKey);
     setCart(newCart);
     removeFromDb(productKey);
   };

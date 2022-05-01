@@ -4,10 +4,8 @@ import fakeData from "../../fakeData/products.JSON";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import { addToDb, getStoredCart } from "../../utilities/fakedb";
-import { ownerDocument } from "@mui/material";
 import { Link } from "react-router-dom";
 const Shop = () => {
-  var id = 0;
   const value = Math.floor(Math.random() * 71);
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
@@ -27,7 +25,7 @@ const Shop = () => {
         setCart(previousCart);
         console.log(previousCart);
       });
-  }, []);
+  }, [value]);
 
   const handleAddProduct = (product) => {
     const sameProduct = cart.find((pd) => pd.key === product.key);
@@ -40,7 +38,7 @@ const Shop = () => {
       count = sameProduct.quantity + 1;
       sameProduct.quantity = count;
       product.quantity = sameProduct.quantity;
-      const other = cart.filter((pd) => pd.key != sameProduct.key);
+      const other = cart.filter((pd) => pd.key !== sameProduct.key);
       newCart = [...other, product];
     }
     setCart(newCart);

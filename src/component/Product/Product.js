@@ -27,9 +27,7 @@ const Product = (props) => {
         {props.showCartButton && (
           <button
             onClick={() => {
-              {
-                props.handleAddProduct(props.prod);
-              }
+              props.handleAddProduct(props.prod);
             }}
             className="main-button"
           >
