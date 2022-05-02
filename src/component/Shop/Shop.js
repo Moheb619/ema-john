@@ -25,7 +25,7 @@ const Shop = () => {
         setCart(previousCart);
         console.log(previousCart);
       });
-  }, [value]);
+  }, []);
 
   const handleAddProduct = (product) => {
     const sameProduct = cart.find((pd) => pd.key === product.key);
