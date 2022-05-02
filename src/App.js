@@ -10,17 +10,15 @@ import ProductDetail from "./component/ProductDetail/ProductDetail";
 function App() {
   return (
     <Router>
-      <div>
-        <Header></Header>
-        <Routes>
-          <Route exact path="/" element={<Shop></Shop>} />
-          <Route path="/shop" element={<Shop></Shop>} />
-          <Route path="/review" element={<Review></Review>} />
-          <Route path="/manage" element={<Inventory></Inventory>} />
-          <Route path="product/:productKey" element={<ProductDetail></ProductDetail>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+      <Header></Header>
+      <Routes>
+        <Route exact path="/" element={<Shop></Shop>} />
+        <Route path="/shop" element={<Shop></Shop>} />
+        <Route path="/review" element={<Review></Review>} />
+        <Route path="/manage" element={<Inventory></Inventory>} />
+        <Route path="product/:productKey" element={<ProductDetail></ProductDetail>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </Router>
   );
 }
